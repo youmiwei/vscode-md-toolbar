@@ -19,7 +19,9 @@
 
 要求 VS Code **≥ 1.80**。
 
-**方式一：VSIX**
+**方式一：从 Release 下载（推荐）**
+
+到 [Releases](https://github.com/youmiwei/vscode-md-toolbar/releases/latest) 下载 `youmiweidemi.md-toolbar-1.0.0.vsix`，然后：
 
 ```bash
 code --install-extension youmiweidemi.md-toolbar-1.0.0.vsix
@@ -27,7 +29,7 @@ code --install-extension youmiweidemi.md-toolbar-1.0.0.vsix
 
 **方式二：扩展面板**
 
-扩展面板右上角 `...` → **从 VSIX 安装**，选上面的 vsix 文件。
+从同一下载地址拿到 vsix 后，扩展面板右上角 `...` → **从 VSIX 安装**，选中它。
 
 **方式三：直接放目录**
 
