@@ -1,0 +1,69 @@
+/* ============================================================
+ * Markdown 工具栏：内置预览的排版补充（由 package.json 的
+ * "markdown.previewStyles" 注入，对内置 Markdown 预览全局生效）
+ *
+ * 只定义布局，不定义颜色 —— 见下方一律用 inherit/opacity，
+ * 这样浅色主题和深色主题都不会被破坏。
+ * ============================================================ */
+
+/* 图片：默认块级 + 水平居中 */
+.markdown-body p > img,
+.markdown-body p > a > img {
+  display: block;
+  margin: 1em auto;
+  max-width: 100%;
+}
+
+/* 对齐（由「图片」按钮插入的 img class 控制，可直接手改 md-left / md-center / md-right） */
+.markdown-body p > img.md-center { margin-left: auto; margin-right: auto; }
+.markdown-body p > img.md-left   { margin-left: 0;    margin-right: auto; }
+.markdown-body p > img.md-right  { margin-left: auto; margin-right: 0; }
+
+/* 表格：整体居中 */
+.markdown-body table {
+  margin: 1em auto;
+}
+
+/* 图注：紧跟在图片段落之后的那一段，自动呈现为居中小字 */
+.markdown-body p:has(> img) + p,
+.markdown-body p:has(> a > img) + p {
+  text-align: center;
+  font-size: 0.9em;
+  opacity: 0.72;
+  margin-top: 0.2em;
+}
+
+/* ============================================================
+ * drawio 图（由 hediet.vscode-drawio 的预览脚本把 ```drawio
+ * 代码块替换成一个承载 svg 的容器）
+ *
+ * 为了不绑死某一版 drawio 的类名，这里同时认三种标记：
+ *   .mxgraph / [data-mxgraph] / [data-drawio-managed]
+ * 规则内容全是"重置"（清零尺寸与内边距、压掉幽灵行高），
+ * 不含任何测量出来的魔数，所以换分辨率/缩放都不会失效。
+ * ============================================================ */
+.markdown-body :is(.mxgraph, [data-mxgraph], [data-drawio-managed]) {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  margin: 0.6em auto !important;
+  /* 容器里可能有个高度 0 的空 div，会靠行高撑出一行 */
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-align: center;
+}
+
+.markdown-body :is(.mxgraph, [data-mxgraph], [data-drawio-managed]) > div:empty {
+  display: none !important;
+}
+
+.markdown-body :is(.mxgraph, [data-mxgraph], [data-drawio-managed]) svg,
+.markdown-body :is(.mxgraph, [data-mxgraph], [data-drawio-managed]) img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}

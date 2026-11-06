@@ -1,0 +1,249 @@
+{
+  "name": "md-toolbar",
+  "displayName": "Markdown 工具栏",
+  "description": "在状态栏放一排 Markdown 按钮（按窗口宽度自动增减，放不下收进「更多」），点一下就在光标处插入或包裹对应语法",
+  "version": "1.0.0",
+  "publisher": "youmiweidemi",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "mdToolbar.bold",
+        "title": "加粗",
+        "icon": "$(bold)"
+      },
+      {
+        "command": "mdToolbar.italic",
+        "title": "斜体",
+        "icon": "$(italic)"
+      },
+      {
+        "command": "mdToolbar.code",
+        "title": "行内代码",
+        "icon": "$(code)"
+      },
+      {
+        "command": "mdToolbar.heading",
+        "title": "标题级别",
+        "icon": "$(symbol-number)"
+      },
+      {
+        "command": "mdToolbar.list",
+        "title": "列表",
+        "icon": "$(list-unordered)"
+      },
+      {
+        "command": "mdToolbar.checklist",
+        "title": "任务列表",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "mdToolbar.table",
+        "title": "插入表格",
+        "icon": "$(table)"
+      },
+      {
+        "command": "mdToolbar.math",
+        "title": "行内公式",
+        "icon": "$(symbol-operator)"
+      },
+      {
+        "command": "mdToolbar.link",
+        "title": "插入链接",
+        "icon": "$(link)"
+      },
+      {
+        "command": "mdToolbar.image",
+        "title": "插入图片",
+        "icon": "$(file-media)"
+      },
+      {
+        "command": "mdToolbar.quote",
+        "title": "引用",
+        "icon": "$(quote)"
+      },
+      {
+        "command": "mdToolbar.codeblock",
+        "title": "代码块",
+        "icon": "$(file-code)"
+      },
+      {
+        "command": "mdToolbar.hr",
+        "title": "分割线",
+        "icon": "$(dash)"
+      },
+      {
+        "command": "mdToolbar.toc",
+        "title": "创建/更新目录",
+        "icon": "$(list-tree)"
+      },
+      {
+        "command": "mdToolbar.more",
+        "title": "更多 Markdown 命令",
+        "icon": "$(ellipsis)"
+      },
+      {
+        "command": "mdToolbar.format",
+        "title": "格式化文档",
+        "icon": "$(wand)"
+      },
+      {
+        "command": "mdToolbar.svg",
+        "title": "插入 drawio 画布（SVG）",
+        "icon": "$(graph)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mdToolbar.more",
+        "key": "ctrl+alt+m",
+        "when": "editorLangId == markdown"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "mdToolbar.bold",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mdToolbar.italic",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mdToolbar.code",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@3"
+        },
+        {
+          "command": "mdToolbar.heading",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@4"
+        },
+        {
+          "command": "mdToolbar.list",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@5"
+        },
+        {
+          "command": "mdToolbar.checklist",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@6"
+        },
+        {
+          "command": "mdToolbar.table",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@7"
+        },
+        {
+          "command": "mdToolbar.math",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@8"
+        },
+        {
+          "command": "mdToolbar.more",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "navigation@9"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "mdToolbar.more",
+          "when": "editorLangId == markdown && config.mdToolbar.titleBar.enabled",
+          "group": "1_modification@9"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Markdown 工具栏",
+      "properties": {
+        "mdToolbar.statusBar.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "在状态栏（窗口最底部）显示一排 Markdown 按钮，仅在 Markdown 文档激活时出现"
+        },
+        "mdToolbar.codeLens.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "在 Markdown 正文第一行上方显示一行可点击的文字按钮"
+        },
+        "mdToolbar.titleBar.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "在标签栏右侧显示图标按钮"
+        },
+        "mdToolbar.statusBar.showLabels": {
+          "type": "boolean",
+          "default": true,
+          "description": "状态栏按钮显示中文标签（图标 + 文字，ESP-IDF 风格）；关闭则只显示图标"
+        },
+        "mdToolbar.statusBar.maxItems": {
+          "type": "number",
+          "default": 0,
+          "minimum": 1,
+          "description": "状态栏最多显示几个按钮；0 表示不限制（窗口较窄时可设为 8 避免被裁切）"
+        },
+        "mdToolbar.statusBar.autoFit": {
+          "type": "boolean",
+          "default": true,
+          "description": "按窗口宽度自动决定状态栏显示几个按钮（通过 wmctrl 读取窗口宽度；仅 Linux 桌面有效，读不到时退回 maxItems）"
+        },
+        "mdToolbar.statusBar.reservePx": {
+          "type": "number",
+          "default": 820,
+          "minimum": 0,
+          "description": "宽度自适应时，为右侧状态项和左侧 Git 分支预留的像素；换设备可调"
+        },
+        "mdToolbar.statusBar.itemWidthPx": {
+          "type": "number",
+          "default": 74,
+          "minimum": 10,
+          "description": "带标签时每个按钮占的像素（含内边距）"
+        },
+        "mdToolbar.statusBar.iconWidthPx": {
+          "type": "number",
+          "default": 32,
+          "minimum": 10,
+          "description": "只显示图标时每个按钮占的像素"
+        },
+        "mdToolbar.statusBar.manualWidth": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "手动指定窗口宽度（像素）。0 = 自动探测；在探测不到窗口宽度的平台上填这里"
+        },
+        "mdToolbar.preview.theme": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "default": "auto",
+          "enumDescriptions": [
+            "跟随编辑器主题（不注入任何主题覆盖）",
+            "强制浅色：白底 + GitHub Light 代码配色",
+            "同 auto，保留给显式选择"
+          ],
+          "description": "内置 Markdown 预览的主题。切换后需重开预览生效"
+        }
+      }
+    },
+    "markdown.previewStyles": [
+      "./media/preview.css",
+      "./media/theme.css"
+    ]
+  },
+  "license": "MIT"
+}
