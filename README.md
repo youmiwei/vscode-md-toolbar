@@ -7,11 +7,11 @@
 
 本插件自身零依赖——只用 VS Code API 和 Node 内置模块，不需要 `npm install`，也不需要构建。
 
-以下插件用来扩展能力，按需安装：
+以下插件是功能依赖，其中 `markdown-all-in-one` 为**必需**：
 
 | 插件 | 作用 | 必需性 |
 |---|---|---|
-| `yzhang.markdown-all-in-one` | 加粗 / 斜体 / 行内代码 / 公式优先转调它的 toggle 命令（可反复切换）；「目录」命令直接调用它的 TOC | **推荐**：缺了加粗等仍有内置兜底，「目录」不可用 |
+| `yzhang.markdown-all-in-one` | 加粗 / 斜体 / 行内代码 / 公式转调它的 toggle 命令；「目录」命令直接调用它的 TOC；预览里的 KaTeX 公式与 GitHub Alerts 样式也由它提供 | **必需**（缺失时上述功能不可用或严重退化） |
 | `hediet.vscode-drawio` | 「SVG」按钮插入的 ```` ```drawio ```` 代码块的渲染、编辑、锁定 | 用到 SVG 按钮时需要 |
 | `bierner.markdown-mermaid` | 文档里已有 ```` ```mermaid ```` 代码块时由它渲染 | 按需 |
 
